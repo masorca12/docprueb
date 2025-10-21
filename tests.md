@@ -1,51 +1,52 @@
-# Documentación de Pruebas: Proyecto Calculadora
+# 📄 Documentación del Proyecto: Calculadora con GUI en Python
 
-Este documento describe las pruebas implementadas para asegurar la calidad y el correcto funcionamiento de la calculadora en Python.
+Este documento detalla la estructura, funcionamiento y pruebas del proyecto de calculadora con interfaz gráfica desarrollada en Python utilizando la biblioteca Tkinter.
 
-## 1. Pruebas Unitarias
+---
 
-Las pruebas unitarias se centran en verificar el funcionamiento de los componentes individuales (métodos) de la clase `Calculator`.
+## 📝 Descripción del Proyecto
 
-### Caso de Prueba: `test_add`
+El proyecto consiste en una aplicación de escritorio de una calculadora simple. La interfaz gráfica de usuario (GUI) permite a los usuarios realizar operaciones aritméticas básicas (`+`, `-`, `*`, `/`) haciendo clic en los botones.
 
-* **ID:** UT-001
-* **Componente:** Método `add(a, b)`
-* **Descripción:** Esta prueba verifica que la suma de dos números enteros positivos produce el resultado esperado.
-* **Pasos de Ejecución:**
-    1.  Crear una instancia de la clase `Calculator`.
-    2.  Llamar al método `add` con los argumentos `5` y `3`.
-* **Resultado Esperado:** El método debe devolver el valor `8`.
-* **Estado:** Implementado y exitoso. ✅
+**Funcionalidades clave:**
+* **Interfaz visual**: Ventana con una pantalla para mostrar números y botones para la entrada de datos.
+* **Operaciones básicas**: Realiza sumas, restas, multiplicaciones y divisiones.
+* **Operaciones encadenadas**: Permite usar el resultado de una operación como el primer operando de la siguiente.
+* **Manejo de errores**: Muestra "Error" en pantalla para operaciones inválidas, como la división por cero.
+* **Botón de limpieza**: Un botón 'C' para reiniciar el estado de la calculadora.
 
-## 2. Pruebas de Integración
 
-Las pruebas de integración evalúan cómo interactúan diferentes partes del sistema. En este caso, se prueba la ejecución secuencial de varias operaciones.
 
-### Caso de Prueba: `test_chained_operations`
+---
 
-* **ID:** IT-001
-* **Componentes:** Métodos `add`, `multiply`, `divide`.
-* **Descripción:** Se prueba una secuencia de operaciones matemáticas para asegurar que el resultado de una operación se pasa correctamente como entrada a la siguiente.
-* **Pasos de Ejecución:**
-    1.  Sumar `10 + 5`.
-    2.  Multiplicar el resultado (`15`) por `2`.
-    3.  Dividir el resultado (`30`) entre `3`.
-* **Resultado Esperado:** El resultado final de la cadena de operaciones debe ser `10`.
-* **Estado:** Implementado y exitoso. ✅
+## 📁 Estructura de Archivos
 
-## 3. Pruebas de Rendimiento
+El proyecto está organizado en los siguientes archivos:
 
-Estas pruebas miden la eficiencia y la capacidad de respuesta de la aplicación bajo una carga de trabajo específica.
+* **`calculator_app.py`**:
+    * **Descripción**: Contiene el código fuente principal de la aplicación. Define la clase `CalculatorApp` que construye y gestiona la interfaz gráfica y la lógica de cálculo.
+    * **Rol**: Es el archivo ejecutable para iniciar la calculadora.
 
-### Caso de Prueba: `performance_test_multiply`
+* **`test_unit_gui.py`**:
+    * **Descripción**: Contiene la **prueba unitaria** del proyecto. Utiliza el framework `unittest` para verificar una funcionalidad aislada y específica.
+    * **Rol**: Asegura que el comportamiento del botón 'Limpiar' (C) funcione como se espera.
 
-* **ID:** PT-001
-* **Componente:** Método `multiply(a, b)`
-* **Descripción:** Medir el tiempo promedio que toma ejecutar la operación de multiplicación un millón de veces para evaluar su eficiencia.
-* **Métrica Clave:** Tiempo de ejecución por operación.
-* **Pasos de Ejecución:**
-    1.  Configurar un entorno de prueba con la clase `Calculator`.
-    2.  Ejecutar el método `multiply(150, 25)` en un bucle de `1,000,000` de veces.
-    3.  Calcular el tiempo total y el tiempo promedio por operación.
-* **Resultado Esperado:** El tiempo de ejecución promedio por operación debe ser bajo (generalmente en el rango de nanosegundos en hardware moderno), lo que indica que la función no tiene cuellos de botella significativos.
-* **Estado:** Propuesta definida. 📈
+* **`test_integration_gui.py`**:
+    * **Descripción**: Contiene la **prueba de integración**. Simula un flujo completo de acciones del usuario para verificar que múltiples componentes de la aplicación interactúan correctamente.
+    * **Rol**: Valida una secuencia de operaciones encadenadas (ej. `5 + 3`, seguido de `* 2`).
+
+* **`test_performance_gui.py`**:
+    * **Descripción**: Contiene la **prueba de rendimiento**. Es un script que mide la eficiencia de la lógica de cálculo bajo una carga de trabajo intensiva.
+    * **Rol**: Proporciona métricas sobre la velocidad del método `calculate()` al ejecutarlo miles de veces.
+
+---
+
+## 🚀 Guía de Ejecución
+
+Para interactuar con el proyecto, sigue estos pasos desde tu terminal.
+
+### 1. Ejecutar la Aplicación Principal
+
+Para abrir y usar la calculadora, ejecuta el siguiente comando:
+```sh
+python calculator_app.py

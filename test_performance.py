@@ -1,16 +1,41 @@
-import timeit
+import time
+import tkinter as tk
+from calculator import CalculatorApp
 
-# Código a ejecutar para la prueba
-setup_code = "from calculator import Calculator; calculator = Calculator()"
-statement_code = "calculator.multiply(150, 25)"
+def run_performance_test():
+    """
+    Mide el rendimiento del método calculate() de la app.
+    """
+    # 1. Preparamos el entorno de la prueba
+    root = tk.Tk()
+    app = CalculatorApp(root)
 
-# Número de repeticiones
-repetitions = 1000000
+    # 2. Definimos la carga de trabajo
+    expression_to_test = "123.456 * 789.012"
+    num_repetitions = 100_000
 
-# Medición del tiempo
-total_time = timeit.timeit(stmt=statement_code, setup=setup_code, number=repetitions)
-average_time_ns = (total_time / repetitions) * 1e9  # Convertir a nanosegundos
+    print(f"\n🚀 Ejecutando prueba de rendimiento...")
+    print(f"Operación: '{expression_to_test}' repetida {num_repetitions:,} veces.")
 
-print(f"Prueba de rendimiento: Multiplicación 📈")
-print(f"Tiempo total para {repetitions} multiplicaciones: {total_time:.4f} segundos.")
-print(f"Tiempo promedio por operación: {average_time_ns:.2f} nanosegundos.")
+    # 3. Ejecutamos y medimos el tiempo
+    start_time = time.perf_counter()
+
+    for _ in range(num_repetitions):
+        app.expression = expression_to_test
+        app.calculate()
+
+    end_time = time.perf_counter()
+    total_time = end_time - start_time
+
+    # 4. Calculamos y mostramos los resultados
+    average_time_ms = (total_time / num_repetitions) * 1000 # Convertir a milisegundos
+
+    print(f"\nResultados:")
+    print(f"  - Tiempo total: {total_time:.4f} segundos.")
+    print(f"  - Tiempo promedio por cálculo: {average_time_ms:.6f} milisegundos.")
+
+    # Limpiamos la ventana de Tkinter
+    root.destroy()
+
+if __name__ == "__main__":
+    run_performance_test()
