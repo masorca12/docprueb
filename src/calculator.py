@@ -72,5 +72,5 @@ class CalculatorApp:
 
 if __name__ == "__main__":
     main_window = tk.Tk()
-    app = CalculatorApp(main_window)
-    main_window.mainloop()
+    app = CalculatorApp(root)
+    root.mainloop()

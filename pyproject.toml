@@ -1,0 +1,4 @@
+# pyproject.toml
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I"] # Reglas básicas: Errores, Flakes, Warnings, Importacioness
